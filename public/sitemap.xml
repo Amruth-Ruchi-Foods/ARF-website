@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://amruthruchi.com/</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
@@ -44,19 +44,19 @@
   </url>
   <url>
     <loc>https://amruthruchi.com/checkout</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://amruthruchi.com/track-order</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://amruthruchi.com/admin</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

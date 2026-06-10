@@ -1,0 +1,270 @@
+╔════════════════════════════════════════════════════════════════╗
+║          ARF WEBSITE - DEPLOYMENT WORKFLOW                     ║
+║                 30 Minutes to Launch                           ║
+╚════════════════════════════════════════════════════════════════╝
+
+┌────────────────────────────────────────────────────────────────┐
+│  PHASE 1: BACKEND DEPLOYMENT (10 minutes)                      │
+└────────────────────────────────────────────────────────────────┘
+
+Step 1: Create .env on Server (2 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SSH Terminal:
+  cd ~/ARF-website/backend
+  nano .env
+
+Paste from: QUICK_DEPLOY_COMMANDS.txt (line 8-19)
+Save: Ctrl+X → Y → Enter
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 2: Setup Node.js in hPanel (3 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Browser: https://hpanel.hostinger.com
+Navigate: Advanced → Node.js → Create Application
+
+Fill Form:
+  Application Root: /home/u574646726/ARF-website/backend
+  Startup File: dist/server.js
+  Node Version: 18.x or 20.x
+  Mode: Production
+
+Click: Create
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 3: Install Dependencies (3 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+In hPanel Node.js App: Click "Terminal" button
+
+Run Commands:
+  cd /home/u574646726/ARF-website/backend
+  npm install
+  npm run build
+
+Wait: 2-3 minutes for completion
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 4: Start Backend (1 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+In hPanel: Node.js → Your App → Click "Start"
+
+Wait: 10-20 seconds
+
+Verify: Status shows "Running" with green indicator
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 5: Test Backend API (1 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Browser: https://amruthruchi.com/api/health
+
+Expected Response:
+  {
+    "message": "ARF Backend API",
+    "version": "1.0.0",
+    "database": "MySQL"
+  }
+
+If 404: Check .htaccess proxy rules
+If 500: Check backend logs in hPanel
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+
+┌────────────────────────────────────────────────────────────────┐
+│  PHASE 2: FRONTEND DEPLOYMENT (10 minutes)                     │
+└────────────────────────────────────────────────────────────────┘
+
+Step 6: Upload Frontend Files (5 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Browser: hPanel → File Manager → public_html
+
+Actions:
+  1. Delete default files (index.html, etc.)
+  2. Upload ALL files from local dist/ folder
+  3. Upload entire public/ folder
+
+Final Structure:
+  public_html/
+  ├── index.html
+  ├── assets/
+  └── public/
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 7: Upload .htaccess (2 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+In File Manager: public_html
+
+Option A: Upload prepared file
+  - Upload .htaccess from project root
+
+Option B: Create manually
+  - New File → Name: .htaccess
+  - Copy from QUICK_DEPLOY_COMMANDS.txt
+  - Save
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 8: Enable SSL (2 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Browser: hPanel → SSL
+
+Find: amruthruchi.com
+Click: Install SSL
+Select: Let's Encrypt (Free)
+
+Wait: 2-5 minutes for activation
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 9: Test Frontend (1 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Browser: https://amruthruchi.com
+
+Verify:
+  ✓ Homepage loads
+  ✓ SSL padlock shows
+  ✓ Navigation works
+  ✓ Products display
+  ✓ Images load
+  ✓ No console errors
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+
+┌────────────────────────────────────────────────────────────────┐
+│  PHASE 3: INTEGRATION TESTING (10 minutes)                     │
+└────────────────────────────────────────────────────────────────┘
+
+Step 10: Test Complete Purchase Flow (5 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Browse Products
+   ✓ Click on product cards
+   ✓ View product details page
+   ✓ Check images load correctly
+
+2. Add to Cart
+   ✓ Add 2-3 different products
+   ✓ View cart drawer
+   ✓ Adjust quantities
+
+3. Checkout Process
+   ✓ Click "Proceed to Checkout"
+   ✓ Fill shipping details
+   ✓ Click "Pay Now"
+
+4. Razorpay Payment
+   ✓ Modal opens
+   Card: 4111 1111 1111 1111
+   CVV: 123
+   Expiry: 12/25
+   OTP: 123456
+
+5. Verify Success
+   ✓ Order confirmation page shows
+   ✓ Order ID displayed
+   ✓ Check database has new order
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 11: Check Database Orders (2 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Browser: hPanel → phpMyAdmin
+
+Database: u574646726_amruthruchi
+Table: orders
+
+Verify:
+  ✓ Test order exists
+  ✓ Payment status = 'paid'
+  ✓ All details correct
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+Step 12: Performance Check (3 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Desktop Browser:
+  ✓ Page loads in < 3 seconds
+  ✓ Images lazy load
+  ✓ Smooth scrolling
+
+Mobile Browser (or DevTools):
+  ✓ Responsive design works
+  ✓ Touch navigation
+  ✓ Cart drawer opens
+
+Browser Console:
+  ✓ No errors
+  ✓ No warnings (or only minor ones)
+
+Status: ⬜ Not Started  ⏳ In Progress  ✅ Completed
+
+
+
+┌────────────────────────────────────────────────────────────────┐
+│  DEPLOYMENT COMPLETE! 🎉                                        │
+└────────────────────────────────────────────────────────────────┘
+
+Final Checklist:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⬜ Backend Status: Running
+⬜ Backend API: Responding
+⬜ Frontend: Live
+⬜ SSL: Active
+⬜ Database: Connected
+⬜ Payment: Working
+⬜ Mobile: Responsive
+
+
+Next Steps (Before Going Live):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Switch to Razorpay LIVE credentials
+2. Test real payment with ₹1
+3. Setup email notifications
+4. Enable automatic backups
+5. Add monitoring/analytics
+6. Submit sitemap to Google
+
+
+Support Documents:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📖 DEPLOY_NOW.md - Detailed guide
+📖 QUICK_DEPLOY_COMMANDS.txt - Copy-paste commands
+📖 DEPLOYMENT_STATUS.md - Current status
+📖 HOSTINGER_DEPLOYMENT.md - Full documentation
+
+
+Troubleshooting:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Issue: Backend not starting
+Fix: Check logs in hPanel → Node.js → Logs
+
+Issue: API returns 404
+Fix: Verify .htaccess proxy rules
+
+Issue: Payment fails
+Fix: Check Razorpay credentials in backend .env
+
+Issue: Frontend blank
+Fix: Check browser console, verify file upload
+
+
+═══════════════════════════════════════════════════════════════════
+
+    Your ARF website is ready to launch! 🚀
+
+═══════════════════════════════════════════════════════════════════

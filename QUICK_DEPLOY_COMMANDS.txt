@@ -1,0 +1,84 @@
+=== QUICK DEPLOY REFERENCE ===
+
+📦 BACKEND .ENV (paste in SSH nano)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+cd ~/ARF-website/backend
+nano .env
+
+# Paste this:
+PORT=3001
+NODE_ENV=production
+FRONTEND_URL=https://amruthruchi.com
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=u574646726_arf
+DB_PASSWORD=vKg$8r*8Ry&
+DB_NAME=u574646726_amruthruchi
+JWT_SECRET=A7fOzIH08XAM+niBLT1WfDMjzB0NpIC9lqrMrr7iAbJlhhuxjx5wDkriKoqfS6uoFL+wUg13bio70ErW41Tbaw==
+RAZORPAY_KEY_ID=rzp_test_SwkfwVgUJdcGr6
+RAZORPAY_KEY_SECRET=iGd0WMKuR0R0v4hRiIB3Fx4U
+ADMIN_EMAIL=admin@amruthruchi.com
+ADMIN_PASSWORD=vKg$8r*8Ry&
+
+# Save: Ctrl+X, Y, Enter
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+🔧 HOSTINGER NODE.JS SETUP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+hPanel → Advanced → Node.js → Setup Application
+
+Application Root: /home/u574646726/ARF-website/backend
+Startup File: dist/server.js
+Node Version: 18.x or 20.x
+Mode: Production
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+💻 TERMINAL COMMANDS (in hPanel Terminal)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+cd /home/u574646726/ARF-website/backend
+npm install
+npm run build
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+🌐 FRONTEND BUILD (on your Mac)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+npm run build
+# Upload dist/ contents to public_html/
+# Upload public/ folder to public_html/public/
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+📄 .HTACCESS (create in public_html)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteCond %{REQUEST_URI} ^/api/
+  RewriteRule ^api/(.*)$ http://localhost:3001/api/$1 [P,L]
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+✅ TEST URLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Backend Health: https://amruthruchi.com/api/health
+Frontend: https://amruthruchi.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+🧪 RAZORPAY TEST CARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Card: 4111 1111 1111 1111
+CVV: 123
+Expiry: 12/25
+OTP: 123456
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
