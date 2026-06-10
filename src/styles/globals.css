@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: 'Poppins', 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-natural: 'Playfair Display', serif;
+  
+  --color-primary-green: #2E7D32;
+  --color-primary-light-green: #8BC34A;
+  --color-primary-orange: #FF9800;
+  --color-neutral-cream: #F5F5F5;
+  --color-neutral-dark-bg: #0F172A;
+  --color-accent-glow: #7CFFB2;
+  
+  --breakpoint-mobile: 320px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1440px;
+}
+
+body {
+  font-family: var(--font-body);
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+.text-natural {
+  font-family: var(--font-natural);
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.gradient-glow {
+  background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(124, 255, 178, 0.1));
+}
