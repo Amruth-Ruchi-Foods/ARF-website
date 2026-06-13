@@ -1,0 +1,115 @@
+================================================================================
+MANUAL UPLOAD STEPS - COPY/PASTE THESE COMMANDS
+================================================================================
+
+✅ BUILDS ARE READY:
+- Frontend: dist/ folder (ready to upload)
+- Backend: backend/dist/ folder (ready to upload)
+
+================================================================================
+OPTION 1: USE HOSTINGER FILE MANAGER (EASIEST)
+================================================================================
+
+Go to: https://srv680-files.hstgr.io/f44d96f21a405fa6/files/
+
+UPLOAD FRONTEND:
+1. Navigate to: public_html/
+2. Delete all existing files
+3. Upload these from your Mac (~/Documents/My Projects/RuchiRich/dist/):
+   - index.html (drag and drop)
+   - assets/ folder (drag and drop)
+   - images/ folder (drag and drop)
+   - Lab-Test/ folder (drag and drop)
+   - verified/ folder (drag and drop)
+   - sitemap.xml (drag and drop)
+
+4. Go back to project root and upload:
+   - .htaccess (from ~/Documents/My Projects/RuchiRich/.htaccess)
+   - Upload it to public_html/
+
+UPLOAD BACKEND:
+1. Navigate to: /home/u574646726/
+2. Create new folder: ARF-website
+3. Inside ARF-website/, create folder: backend
+4. Navigate to: /home/u574646726/ARF-website/backend/
+5. Upload from your Mac (~/Documents/My Projects/RuchiRich/backend/):
+   - dist/ folder (drag the whole folder)
+   - package.json
+   - package-lock.json
+
+6. Create .env file:
+   - Click "New File"
+   - Name: .env
+   - Click Edit and paste:
+
+NODE_ENV=production
+PORT=3001
+DATABASE_HOST=localhost
+DATABASE_USER=u574646726_arf
+DATABASE_PASSWORD=vKg$8r*8Ry&
+DATABASE_NAME=u574646726_amruthruchi
+JWT_SECRET=A7fOzIH08XAM+niBLT1WfDMjzB0NpIC9lqrMrr7iAbJlhhuxjx5wDkriKoqfS6uoFL+wUg13bio70ErW41Tbaw==
+RAZORPAY_KEY_ID=rzp_test_SwkfwVgUJdcGr6
+RAZORPAY_KEY_SECRET=iGd0WMKuR0R0v4hRiIB3Fx4U
+FRONTEND_URL=https://amruthruchi.com
+
+   - Save file
+
+================================================================================
+OPTION 2: USE SSH/SCP (IF YOU PREFER COMMAND LINE)
+================================================================================
+
+Run these commands one by one in your Mac Terminal.
+You'll need to enter password: vKg$8r*8Ry&
+
+# Upload Frontend
+scp -P 65002 -r dist/* u574646726@82.25.106.110:~/domains/amruthruchi.com/public_html/
+
+# Upload .htaccess
+scp -P 65002 .htaccess u574646726@82.25.106.110:~/domains/amruthruchi.com/public_html/
+
+# Create backend directory
+ssh -p 65002 u574646726@82.25.106.110 "mkdir -p ~/ARF-website/backend"
+
+# Upload backend dist
+scp -P 65002 -r backend/dist u574646726@82.25.106.110:~/ARF-website/backend/
+
+# Upload package files
+scp -P 65002 backend/package.json backend/package-lock.json u574646726@82.25.106.110:~/ARF-website/backend/
+
+# Create .env file
+ssh -p 65002 u574646726@82.25.106.110 "cat > ~/ARF-website/backend/.env << 'EOF'
+NODE_ENV=production
+PORT=3001
+DATABASE_HOST=localhost
+DATABASE_USER=u574646726_arf
+DATABASE_PASSWORD=vKg\$8r*8Ry&
+DATABASE_NAME=u574646726_amruthruchi
+JWT_SECRET=A7fOzIH08XAM+niBLT1WfDMjzB0NpIC9lqrMrr7iAbJlhhuxjx5wDkriKoqfS6uoFL+wUg13bio70ErW41Tbaw==
+RAZORPAY_KEY_ID=rzp_test_SwkfwVgUJdcGr6
+RAZORPAY_KEY_SECRET=iGd0WMKuR0R0v4hRiIB3Fx4U
+FRONTEND_URL=https://amruthruchi.com
+EOF"
+
+================================================================================
+AFTER UPLOAD - START THE BACKEND
+================================================================================
+
+1. Go to hPanel: https://hpanel.hostinger.com/
+2. Select website: amruthruchi.com
+3. Look in LEFT SIDEBAR for "Advanced" → "Setup Node.js App"
+4. Configure:
+   - Node.js version: 18.x or 20.x
+   - Application root: /home/u574646726/ARF-website/backend
+   - Application startup file: dist/server.js
+5. Click Create/Start
+
+================================================================================
+TEST YOUR DEPLOYMENT
+================================================================================
+
+Frontend: https://amruthruchi.com
+Backend health: https://amruthruchi.com/api/health
+Backend products: https://amruthruchi.com/api/products
+
+================================================================================

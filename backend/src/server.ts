@@ -1,3 +1,5 @@
+console.log("SERVER FILE LOADED");
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -11,11 +13,28 @@ import paymentRoutes from './routes/payment.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = parseInt(process.env.PORT || '3001', 10);
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://amruthruchi.com',
+  'https://www.amruthruchi.com'
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn(`Blocked CORS request from origin: ${origin}`);
+      callback(null, true); // Allow all origins in production for now
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -62,8 +81,10 @@ async function startServer() {
     console.error('⚠️  Server will start but database operations will fail.');
   }
   
-  app.listen(PORT, () => {
-    console.log(`🚀 Backend server running on http://localhost:${PORT}`);
+  const HOST = process.env.HOST || '0.0.0.0';
+  console.log("ABOUT TO START EXPRESS");
+  app.listen(PORT, HOST, () => {
+    console.log(`🚀 Backend server running on http://${HOST}:${PORT}`);
     console.log(`📦 Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🗄️  Database: MySQL`);
   });

@@ -1,0 +1,42 @@
+================================================================================
+CRITICAL FIX: Upload Correct index.html
+================================================================================
+
+The problem: You uploaded the DEVELOPMENT index.html instead of the BUILT one.
+
+Current (wrong) index.html has:
+<script type="module" src="/src/main.tsx"></script>
+
+Correct (built) index.html should have:
+<script type="module" crossorigin src="/assets/index-CLSDYMkk.js"></script>
+
+================================================================================
+QUICK FIX - Upload Correct File
+================================================================================
+
+1. Go to Hostinger File Manager:
+   https://srv1880-files.hstgr.io/745af4f89716786a/files/public_html/
+
+2. Delete the current index.html
+
+3. From your Mac, navigate to:
+   ~/Documents/My Projects/RuchiRich/dist/
+
+4. Upload the index.html from the dist/ folder to public_html/
+
+5. Refresh https://amruthruchi.com - frontend should now work!
+
+================================================================================
+OR - Re-upload Everything from dist/
+================================================================================
+
+Safer option: Delete everything in public_html/ and re-upload all from dist/:
+- index.html
+- assets/ folder
+- images/ folder  
+- Lab-Test/ folder
+- verified/ folder
+- sitemap.xml
+- .htaccess (from project root, not dist/)
+
+================================================================================
